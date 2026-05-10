@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurante</title>
+    <link rel="icon" href="media/fast-food.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <img src="media/restaurant-bg.jpg" alt="background" class="background">
+    <div class="container">
+        <h1>Restaurante de SebasSebitas</h1>
+        
+        <div class="order-flow">
+            <!-- Cada item tiene un ID para manipularlo desde JS -->
+            <div id="step-bebida" class="item-card">
+                <span class="icon">🥤</span>
+                <p>Bebida</p>
+                <div class="status">Esperando...</div>
+            </div>
+
+            <div id="step-pizza" class="item-card">
+                <span class="icon">🍕</span>
+                <p>Pizza</p>
+                <div class="status">Esperando...</div>
+            </div>
+
+            <div id="step-postre" class="item-card">
+                <span class="icon">🍰</span>
+                <p>Postre</p>
+                <div class="status">Esperando...</div>
+            </div>
+        </div>
+            <button id="btn-ordenar" class="btn-primary">¡Ordenar Ahora!</button>
+            <div id="console-output" class="console">
+                > Presiona el botón para iniciar la orden...
+            </div>
+    </div>
+
+    
+</body>
+</html>
