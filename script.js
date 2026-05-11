@@ -1,7 +1,24 @@
 const btnOrdenar = document.getElementById('btn-ordenar');
 const consoleOutput = document.getElementById('console-output');
+const btnFondo = document.getElementById('btn-fondo');
+const backgroundImg = document.querySelector('.background');
 
-// Función para actualizar la interfaz visual
+// codigo para cambiar el fondo
+const toggleFondo = () => {
+    const body = document.body;
+    const isDark = body.classList.toggle('dark-mode');
+    
+    if (isDark) {
+        btnFondo.innerText = 'Modo Claro';
+    } else {
+        btnFondo.innerText = 'Modo Oscuro';
+    }
+};
+
+// agregar event listener al boton de fondo
+btnFondo.addEventListener('click', toggleFondo);
+
+// codigo para actualizar la interfaz visual
 const actualizarPaso = (id, estado, log) => {
     const card = document.getElementById(id);
     const statusText = card.querySelector('.status');
@@ -22,7 +39,7 @@ const actualizarPaso = (id, estado, log) => {
     consoleOutput.scrollTop = consoleOutput.scrollHeight;
 };
 
-// Promesa base para preparar comida
+// promesas base para preparar comida
 const prepararPlatillo = (id, nombre, tiempo) => {
     return new Promise((resolve) => {
         actualizarPaso(id, 'cocinando', `Cocinando ${nombre}...`);
@@ -34,9 +51,9 @@ const prepararPlatillo = (id, nombre, tiempo) => {
     });
 };
 
-// Función principal que dispara el botón
+// codigo principal que dispara el boton de orden
 const iniciarSimulacion = () => {
-    // 1. Configuración inicial
+    // primero la configuración inicial
     btnOrdenar.disabled = true;
     consoleOutput.innerHTML = "> Orden recibida. Iniciando proceso...";
     
@@ -46,7 +63,7 @@ const iniciarSimulacion = () => {
         c.querySelector('.status').innerText = "Esperando...";
     });
 
-    // 2. Encadenamiento riguroso de Promesas
+    // segundo el encadenamiento riguroso de promesas
     prepararPlatillo('step-bebida', 'Bebida', 1500)
         .then(() => {
             return prepararPlatillo('step-pizza', 'Pizza', 3000);
@@ -64,5 +81,5 @@ const iniciarSimulacion = () => {
         });
 };
 
-// Asignar evento al botón
+// asignar evento al boton de ordenar
 btnOrdenar.addEventListener('click', iniciarSimulacion);

@@ -8,13 +8,36 @@ body {
 }
 
 .container {
-    background: wheat;
+    background-color: antiquewhite;
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     text-align: center;
     width: 90%;
     max-width: 600px;
+}
+
+body.dark-mode .container {
+    background-color: #333333;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    color: white;
+}
+body.dark-mode .item-card {
+    color: black;
+}
+
+.btn-dark {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem;
+    border-radius: 15rem;
+    font-size: 1rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 @media (max-width: 600px) {
@@ -115,4 +138,22 @@ body {
     text-align: left;
     height: 100px;
     overflow-y: auto;
+}
+
+.github {
+    position: fixed;
+    bottom: 20px;
+    align-self: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: block;
+    background-color: white;
+}
+
+.github img {
+    width: 100;
+    height: 100%;
+    border-radius: 20px;
 }
