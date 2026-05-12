@@ -4,6 +4,7 @@ const btnFondo = document.getElementById('btn-fondo');
 const backgroundImg = document.querySelector('.background');
 
 // codigo para cambiar el fondo
+//toggle significa que si ya existe, se quita, y si no, se agrega, la fomra facil de alternar entre dos estilos
 const toggleFondo = () => {
     const body = document.body;
     const isDark = body.classList.toggle('dark-mode');
@@ -25,13 +26,16 @@ const actualizarPaso = (id, estado, log) => {
     
     // Limpiamos clases
     card.classList.remove('active', 'completed');
-    
+    // if y else 
     if (estado === 'cocinando') {
         card.classList.add('active');
         statusText.innerText = "Preparando...";
     } else if (estado === 'entregado') {
         card.classList.add('completed');
         statusText.innerText = "¡Listo!✅";
+    } else if (estado === 'fallo') {
+        card.classList.add('fallo');
+        statusText.innerText = "Fallo ❌";
     }
 
     // Agregar mensaje a la consola
@@ -41,12 +45,18 @@ const actualizarPaso = (id, estado, log) => {
 
 // promesas base para preparar comida
 const prepararPlatillo = (id, nombre, tiempo) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         actualizarPaso(id, 'cocinando', `Cocinando ${nombre}...`);
         
         setTimeout(() => {
-            actualizarPaso(id, 'entregado', `${nombre} entregado.`);
-            resolve();
+            const estatus = Math.random() <0.5; // 20% de probabilidad de falla
+            if (Math.random() < estatus) {
+                actualizarPaso(id, 'fallo', `${nombre} falló en prepararse.`);
+                reject(new Error(`${nombre} falló en prepararse.`));
+            } else {
+                actualizarPaso(id, 'entregado', `${nombre} entregado.`);
+                resolve();
+            }
         }, tiempo);
     });
 };
