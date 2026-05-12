@@ -16,6 +16,9 @@ A web-based simulation of a restaurant order fulfillment system. This project de
 *   **CSS3:** Flexbox layout, custom animations, and state-dependent styling.
 *   **JavaScript (ES6):** Promises, `setTimeout` for simulation, and DOM manipulation.
 
+## Website Preview
+![Screenshot](./media/vista-previa.png)
+
 ## Logic Breakdown
 
 The core of this project is a `cookDish` function that returns a **Promise**. This allows the application to "wait" for a specific amount of time (simulating cooking) before resolving and moving to the next block in the `.then()` chain.
