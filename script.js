@@ -44,20 +44,25 @@ const actualizarPaso = (id, estado, log) => {
 };
 
 // promesas base para preparar comida
+// Es una función que recibe tres datos: el ID del elemento visual para actualizarlo, 
+// el nombre de la comida y el tiempo que tardará en cocinarse.
+// promesas base para preparar comida
 const prepararPlatillo = (id, nombre, tiempo) => {
     return new Promise((resolve, reject) => {
         actualizarPaso(id, 'cocinando', `Cocinando ${nombre}...`);
-        
-        setTimeout(() => {
-            const estatus = Math.random() <0.5; // 20% de probabilidad de falla
-            if (Math.random() < estatus) {
-                actualizarPaso(id, 'fallo', `${nombre} falló en prepararse.`);
-                reject(new Error(`${nombre} falló en prepararse.`));
-            } else {
+
+        // se coloca una pequena probalidad de falla 
+        if (Math.random() < 0.06) {
+            // aqui falla de inmediato sin esperar el setTimeout
+            actualizarPaso(id, 'fallo', `${nombre} falló en prepararse.`);
+            reject(new Error(`${nombre} falló en prepararse.`));
+        } else {
+            // si la operacion no falla, se sigue cocinando 
+            setTimeout(() => {
                 actualizarPaso(id, 'entregado', `${nombre} entregado.`);
                 resolve();
-            }
-        }, tiempo);
+            }, tiempo);
+        }
     });
 };
 
@@ -69,11 +74,14 @@ const iniciarSimulacion = () => {
     
     // Reiniciar tarjetas si ya se usaron
     document.querySelectorAll('.item-card').forEach(c => {
-        c.classList.remove('active', 'completed');
+       
+        c.classList.remove('active', 'completed', 'fallo');
         c.querySelector('.status').innerText = "Esperando...";
     });
 
     // segundo el encadenamiento riguroso de promesas
+    // tiene tre argumentos 
+    // funciona 
     prepararPlatillo('step-bebida', 'Bebida', 1500)
         .then(() => {
             return prepararPlatillo('step-pizza', 'Pizza', 3000);
